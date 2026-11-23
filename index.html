@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth" style="scroll-padding-top: 136px;">
 <head>
@@ -53,7 +52,7 @@
       background-size: 100% 100%, 100% 100%, 44px 44px, 44px 44px;
     }
 
-    /* Inline Photo Expansion (Not a Modal) */
+    /* Inline Photo Expansion (View-Only, Locked Photo) */
     .profile-photo-frame {
       width: 88px;
       height: 88px;
@@ -62,6 +61,7 @@
       border: 1.5px solid rgba(var(--glow-rgb), 0.45);
       box-shadow: 0 0 24px -6px rgba(var(--glow-rgb), 0.35);
       cursor: pointer;
+      user-select: none;
       transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1),
                   height 0.35s cubic-bezier(0.22, 1, 0.36, 1),
                   border-radius 0.35s cubic-bezier(0.22, 1, 0.36, 1),
@@ -324,7 +324,7 @@
               Open to IT Internships &amp; Entry-Level Opportunities
             </div>
 
-            <!-- Header + Inline Expandable Photo -->
+            <!-- Header + Locked Inline Expandable Photo -->
             <div class="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
               <div>
                 <h1 class="text-3xl font-extrabold tracking-tight sm:text-5xl">
@@ -335,7 +335,7 @@
                 </p>
               </div>
 
-              <!-- Clickable Photo Controls & Inline Expandable Frame -->
+              <!-- View-Only Clickable Photo Frame (No Upload/Change Option for Viewers) -->
               <div class="flex flex-col items-start sm:items-end gap-3 shrink-0">
                 <div
                   id="hero-photo-frame"
@@ -348,28 +348,25 @@
                   class="profile-photo-frame relative bg-slate-900/90"
                   title="Click to make photo bigger inline"
                 >
+                  <!-- Replace 'profile.jpg' with your uploaded photo filename in GitHub -->
                   <img
                     id="hero-photo-img"
-                    src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420' viewBox='0 0 420 420'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%230f172a'/%3E%3Cstop offset='100%25' stop-color='%231e293b'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='420' height='420' fill='url(%23g)'/%3E%3Ccircle cx='210' cy='165' r='68' fill='%2338bdf8' fill-opacity='0.22' stroke='%2338bdf8' stroke-width='3'/%3E%3Cpath d='M95 350c12-62 56-98 115-98s103 36 115 98' fill='%23818cf8' fill-opacity='0.18' stroke='%23818cf8' stroke-width='3'/%3E%3Ctext x='210' y='392' text-anchor='middle' fill='%2394a3b8' font-family='monospace' font-size='18'%3EREYMAR JOHN O. SENGCO%3C/text%3E%3C/svg%3E"
+                    src="profile.jpg"
+                    onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22420%22 height=%22420%22 viewBox=%220 0 420 420%22%3E%3Cdefs%3E%3ClinearGradient id=%22g%22 x1=%220%25%22 y1=%220%25%22 x2=%22100%25%22 y2=%22100%25%22%3E%3Cstop offset=%220%25%22 stop-color=%22%230f172a%22/%3E%3Cstop offset=%22100%25%22 stop-color=%22%231e293b%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%22420%22 height=%22420%22 fill=%22url(%23g)%22/%3E%3Ccircle cx=%22210%22 cy=%22165%22 r=%2268%22 fill=%22%2338bdf8%22 fill-opacity=%220.22%22 stroke=%22%2338bdf8%22 stroke-width=%223%22/%3E%3Cpath d=%22M95 350c12-62 56-98 115-98s103 36 115 98%22 fill=%22%23818cf8%22 fill-opacity=%220.18%22 stroke=%22%23818cf8%22 stroke-width=%223%22/%3E%3Ctext x=%22210%22 y=%22392%22 text-anchor=%22middle%22 fill=%22%2394a3b8%22 font-family=%22monospace%22 font-size=%2218%22%3EREYMAR JOHN O. SENGCO%3C/text%3E%3C/svg%3E';"
                     alt="Reymar John O. Sengco"
-                    class="h-full w-full object-cover transition-transform duration-300"
+                    draggable="false"
+                    class="h-full w-full object-cover transition-transform duration-300 pointer-events-none"
                   />
                 </div>
 
-                <div class="flex items-center gap-2.5">
-                  <button
-                    type="button"
-                    onclick="toggleInlinePhoto()"
-                    id="photo-size-btn"
-                    class="rounded-lg border border-white/10 bg-white/[0.04] px-3 py-1.5 font-mono text-[11px] text-slate-300 transition hover:border-white/25 hover:text-white"
-                  >
-                    Enlarge Photo
-                  </button>
-                  <label class="cursor-pointer rounded-lg border border-white/10 bg-white/[0.04] px-3 py-1.5 font-mono text-[11px] accent-text transition hover:border-white/25">
-                    Change Photo
-                    <input type="file" accept="image/*" onchange="handlePhotoUpload(event)" class="hidden" />
-                  </label>
-                </div>
+                <button
+                  type="button"
+                  onclick="toggleInlinePhoto()"
+                  id="photo-size-btn"
+                  class="rounded-lg border border-white/10 bg-white/[0.04] px-3 py-1.5 font-mono text-[11px] text-slate-300 transition hover:border-white/25 hover:text-white"
+                >
+                  Enlarge Photo
+                </button>
               </div>
             </div>
 
@@ -721,7 +718,7 @@ function verifySupplyRecord(int $recorded, int $actual): array {
     <!-- Footer -->
     <footer class="mt-20 flex flex-col items-center justify-between gap-4 border-t border-white/[0.06] pt-8 text-xs text-slate-500 sm:flex-row">
       <p>© 2026 Reymar John O. Sengco · San Jose City, Nueva Ecija</p>
-      
+      <p class="font-mono text-[11px]">Cross-Platform Interactive Bento Portfolio</p>
     </footer>
   </main>
 
@@ -760,7 +757,7 @@ function verifySupplyRecord(int $recorded, int $actual): array {
   </div>
 
   <script>
-    // 0. Inline Photo Expansion (Not a Modal) & Upload
+    // 0. Inline Photo Expansion (View-Only, Locked Photo)
     let isPhotoExpanded = false;
 
     function toggleInlinePhoto() {
@@ -781,29 +778,6 @@ function verifySupplyRecord(int $recorded, int $actual): array {
         caption.classList.remove('flex');
       }
     }
-
-    function handlePhotoUpload(event) {
-      const file = event.target.files && event.target.files[0];
-      if (!file) return;
-
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const dataUrl = e.target.result;
-        document.getElementById('hero-photo-img').src = dataUrl;
-        try {
-          localStorage.setItem('reymar_profile_photo', dataUrl);
-        } catch (_) {}
-        showToast('Profile photo updated!');
-      };
-      reader.readAsDataURL(file);
-    }
-
-    try {
-      const savedPhoto = localStorage.getItem('reymar_profile_photo');
-      if (savedPhoto) {
-        document.getElementById('hero-photo-img').src = savedPhoto;
-      }
-    } catch (_) {}
 
     // 1. Unified Pointer, Touch & Mobile Scroll Spotlight on All Bento Cards
     const bentoCards = document.querySelectorAll('.bento-card');
@@ -1132,5 +1106,3 @@ echo "Status: All core services operational."`
   </script>
 </body>
 </html>
-
-```
